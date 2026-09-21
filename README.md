@@ -1,24 +1,28 @@
-# [Package Name]
+# Irem Package
 
-> One-sentence summary of what this package does (e.g., "Rotates an image by a specified angle.")
+> A NovaVision package demonstrating a multi-executor structure with image inputs/outputs and dependent dropdown configurations.
 
-**Category:** Utility / Capsule / Classical Computer Vision / Preprocessing / Auxiliary / Sources / Widget
+**Category:** Utility
 
-**Status:** Stable / Beta / Experimental
+**Status:** Experimental
 
-**Last Updated:** DD.MM.YYYY
+**Last Updated:** 22.09.2026
 
 ---
 
 ## 1. Overview
 
-Describe in 2–3 sentences/paragraphs what this package does, what problem it solves, and typical use cases. Mention when a user should choose this package over a similar one, if relevant.
+Irem Package is a NovaVision package developed to demonstrate a multi-executor package structure. The package contains two independent executors with different input/output requirements and dependent dropdown configurations.
+
+The first executor accepts one image and produces one image output, while the second executor accepts two image inputs and produces two image outputs. The package also demonstrates dependent dropdown options containing different UI field types.
 
 **Typical use cases:**
 
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
+- Demonstrating a package with multiple executors in NovaVision.
+- Testing image input and output connections in a Flow.
+- Demonstrating dependent dropdown configurations with different field types.
+
+![NovaVision Flow](docs/flow.png)
 
 ---
 
@@ -26,9 +30,12 @@ Describe in 2–3 sentences/paragraphs what this package does, what problem it s
 
 | Field Name | Kind/Type | Required | Default | Description |
 |---|---|---|---|---|
-| `[inputFieldName]` | `[Image / string / number / list / object ...]` | Yes/No | `[default or —]` | [What this input represents] |
+| `inputImage` | `Image / list[Image]` | Yes | — | Image input used by the First Executor. |
+| `inputImage2` | `Image / list[Image]` | Yes | — | Second image input used by the Second Executor. |
 
-> Derived from the package `Inputs` / `Input` classes. A field that accepts a single object or a list is shown explicitly.
+The `inputImage` field accepts either a single `Image` object or a list of `Image` objects.
+
+The `inputImage2` field follows the same structure and accepts either a single `Image` object or a list of `Image` objects.
 
 ---
 
@@ -36,9 +43,25 @@ Describe in 2–3 sentences/paragraphs what this package does, what problem it s
 
 | Parameter | Type | Field Type (UI control) | Allowed Values / Range | Default | Description |
 |---|---|---|---|---|---|
-| `[ParamName]` | `[number/bool/string/object]` | `[textInput/dropdownlist/...]` | `[range or options]` | `[default]` | [What this parameter controls, and how it affects behavior] |
+| `Mode` | `object` | `dependentDropdownlist` | `Basic`, `Advanced` | — | Selects the configuration option for the executor. |
+| `Basic.Text` | `string` | `textInput` | Free text | — | Text value available under the Basic option. |
+| `Basic.Number` | `object` | `dropdownlist` | `One`, `Two` | — | Selects between the numeric options 1 and 2. |
+| `Advanced.Language` | `string` | `textInput` | Free text | — | Language value available under the Advanced option. |
+| `Advanced.Enabled` | `object` | `dropdownlist` | `Enabled`, `Disabled` | — | Selects the boolean enabled state. |
 
-> Derived from the package `Configs` classes, including validation bounds and dropdown option labels where present. `ConfigExecutor` is not included.
+The package implements the required `dependentDropdownlist` configuration for both executors.
+
+Each executor provides two dependent dropdown options:
+
+- **Basic**
+  - `Text` → `textInput`
+  - `Number` → `dropdownlist`
+
+- **Advanced**
+  - `Language` → `textInput`
+  - `Enabled` → `dropdownlist`
+
+The same configuration structure is implemented independently for both executors.
 
 ---
 
@@ -46,30 +69,39 @@ Describe in 2–3 sentences/paragraphs what this package does, what problem it s
 
 | Field Name | Kind/Type | Description |
 |---|---|---|
-| `[outputFieldName]` | `[Image / string / number / list / object ...]` | [What this output represents] |
+| `outputImage` | `Image / list[Image]` | Image output produced by the First Executor. |
+| `outputImage2` | `Image / list[Image]` | Second image output produced by the Second Executor. |
 
-> Derived from the package `Outputs` classes.
+The First Executor receives `inputImage` and returns it through `outputImage`.
+
+The Second Executor receives `inputImage` and `inputImage2` and returns them through `outputImage` and `outputImage2`, respectively.
 
 ---
 
 ## 5. Use Case Examples
 
-**Use case 1: [Short title]**
+**Use case 1: Single Image Flow**
 
-[Describe the scenario — what pipeline is being built, what package(s) come before this one and provide its input, what this package does in that context, and what package(s) come after it to consume its output.]
+An image source provides an image to the `First Executor` through the `inputImage` input. The executor receives the image and returns it through `outputImage`, which can then be consumed by another package or component in the Flow.
 
-**Use case 2: [Short title]**
+**Use case 2: Two Image Flow**
 
-[Same structure as above, for a different context.]
+Two image sources provide `inputImage` and `inputImage2` to the `Second Executor`. The executor returns the corresponding images through `outputImage` and `outputImage2`, which can then be connected to subsequent components in the Flow.
 
-**Use case 3: [Short title, optional]**
+**Use case 3: Executor Configuration Demonstration**
 
-[Same structure as above, for a different context.]
+The package can be used to demonstrate a multi-executor NovaVision package. The user can select between `First Executor` and `Second Executor` and configure each executor using its corresponding dependent dropdown options.
 
 ---
 
 ## 6. Limitations and Notes
 
-- [Known constraints, e.g. value ranges, unsupported formats, size limits]
-- [Performance notes, e.g. GPU requirement, expected latency]
-- [Common pitfalls or things to watch out for]
+- The package is primarily a demonstration of the NovaVision multi-executor package structure and configuration system.
+- The executors currently pass the received image data to their corresponding outputs rather than performing a computer vision transformation.
+- `inputImage` and `inputImage2` accept either a single image or a list of images.
+- The package requires the NovaVision SDK/runtime environment for execution.
+- The package was validated for Python syntax using `python -m compileall src`.
+- During Flow integration, the NovaVision platform reported the following error while resolving images for the active executor:
+
+```text
+No images found for active executor: FirstExecutor in package: IremPackage
