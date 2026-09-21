@@ -10,25 +10,37 @@ from components.Package.src.utils.response import build_response
 from components.Package.src.models.PackageModel import PackageModel
 
 
-class Package(Component):
+class Executor2(Component):
 
     def __init__(self, request, bootstrap):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
-        self.image = self.request.get_param("inputImage")
+        self.image1 = self.request.get_param("inputImage")
+        self.image2 = self.request.get_param("inputImage2")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
         return {}
 
     def run(self):
-        img = Image.get_frame(
-            img=self.image,
+        img1 = Image.get_frame(
+            img=self.image1,
             redis_db=self.redis_db
         )
 
-        self.image = Image.set_frame(
-            img=img,
+        img2 = Image.get_frame(
+            img=self.image2,
+            redis_db=self.redis_db
+        )
+
+        self.image1 = Image.set_frame(
+            img=img1,
+            package_uID=self.uID,
+            redis_db=self.redis_db
+        )
+
+        self.image2 = Image.set_frame(
+            img=img2,
             package_uID=self.uID,
             redis_db=self.redis_db
         )
