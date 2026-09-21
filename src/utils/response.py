@@ -19,6 +19,7 @@ def build_executor1_response(context):
     output = OutputImage(value=context.image)
     outputs = FirstExecutorOutputs(outputImage=output)
     response = FirstExecutorResponse(outputs=outputs)
+
     executor = FirstExecutor(value=response)
     config_executor = ConfigExecutor(value=executor)
     package_configs = PackageConfigs(executor=config_executor)
@@ -41,6 +42,7 @@ def build_executor2_response(context):
     )
 
     response = SecondExecutorResponse(outputs=outputs)
+
     executor = SecondExecutor(value=response)
     config_executor = ConfigExecutor(value=executor)
     package_configs = PackageConfigs(executor=config_executor)
