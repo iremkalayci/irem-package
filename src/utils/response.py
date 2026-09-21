@@ -1,63 +1,15 @@
-from sdks.novavision.src.helper.package import PackageHelper
 
-from components.Package.src.models.PackageModel import (
-    PackageModel,
-    PackageConfigs,
-    ConfigExecutor,
-    FirstExecutor,
-    FirstExecutorResponse,
-    FirstExecutorOutputs,
-    SecondExecutor,
-    SecondExecutorResponse,
-    SecondExecutorOutputs,
-    OutputImage,
-)
+from sdks.novavision.src.helper.package import PackageHelper
+from components.Package.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, PackageOutputs, PackageResponse, PackageExecutor, OutputImage
 
 
 def build_response(context):
-
-    executor_value = context.request.model.configs.executor.value
-
-    if isinstance(executor_value, FirstExecutor):
-        output_image = OutputImage(value=context.image)
-        outputs = FirstExecutorOutputs(
-            outputImage=output_image
-        )
-        response = FirstExecutorResponse(
-            outputs=outputs
-        )
-        executor = FirstExecutor(
-            value=response
-        )
-
-    elif isinstance(executor_value, SecondExecutor):
-        output_image1 = OutputImage(value=context.image1)
-        output_image2 = OutputImage(value=context.image2)
-
-        outputs = SecondExecutorOutputs(
-            outputImage=output_image1,
-            outputImage2=output_image2
-        )
-
-        response = SecondExecutorResponse(
-            outputs=outputs
-        )
-        executor = SecondExecutor(
-            value=response
-        )
-
-    else:
-        raise ValueError("Unknown executor")
-
-    package_configs = PackageConfigs(
-        executor=ConfigExecutor(
-            value=executor
-        )
-    )
-
-    package = PackageHelper(
-        packageModel=PackageModel,
-        packageConfigs=package_configs
-    )
-
-    return package.build_model(context)
+    outputImage = OutputImage(value=context.image)
+    Outputs = PackageOutputs(outputImage=outputImage)
+    packageResponse = PackageResponse(outputs=Outputs)
+    packageExecutor = PackageExecutor(value=packageResponse)
+    executor = ConfigExecutor(value=packageExecutor)
+    packageConfigs = PackageConfigs(executor=executor)
+    package = PackageHelper(packageModel=PackageModel, packageConfigs=packageConfigs)
+    packageModel = package.build_model(context)
+    return packageModel
