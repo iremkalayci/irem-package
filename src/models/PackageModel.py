@@ -1,4 +1,5 @@
 from pydantic import Field, validator
+
 from typing import List, Optional, Union, Literal
 
 from sdks.novavision.src.base.model import (
@@ -16,7 +17,6 @@ from sdks.novavision.src.base.model import (
 
 
 class InputImage(Input):
-
     name: Literal["inputImage"] = "inputImage"
     value: Union[List[Image], Image]
     type: str = "object"
@@ -34,7 +34,6 @@ class InputImage(Input):
 
 
 class OutputImage(Output):
-
     name: Literal["outputImage"] = "outputImage"
     value: Union[List[Image], Image]
     type: str = "object"
@@ -52,17 +51,14 @@ class OutputImage(Output):
 
 
 class FirstExecutorInputs(Inputs):
-
     inputImage: InputImage
 
 
 class FirstExecutorOutputs(Outputs):
-
     outputImage: OutputImage
 
 
 class FirstBasicText(Config):
-
     name: Literal["Text"] = "Text"
     value: str
     type: Literal["string"] = "string"
@@ -70,7 +66,6 @@ class FirstBasicText(Config):
 
 
 class FirstNumberOne(Config):
-
     name: Literal["One"] = "One"
     value: Literal[1] = 1
     type: Literal["number"] = "number"
@@ -78,7 +73,6 @@ class FirstNumberOne(Config):
 
 
 class FirstNumberTwo(Config):
-
     name: Literal["Two"] = "Two"
     value: Literal[2] = 2
     type: Literal["number"] = "number"
@@ -86,7 +80,6 @@ class FirstNumberTwo(Config):
 
 
 class FirstBasicNumber(Config):
-
     name: Literal["Number"] = "Number"
     value: Union[FirstNumberOne, FirstNumberTwo]
     type: Literal["object"] = "object"
@@ -94,7 +87,6 @@ class FirstBasicNumber(Config):
 
 
 class FirstLanguageText(Config):
-
     name: Literal["Language"] = "Language"
     value: str
     type: Literal["string"] = "string"
@@ -102,7 +94,6 @@ class FirstLanguageText(Config):
 
 
 class FirstEnabledTrue(Config):
-
     name: Literal["Enabled"] = "Enabled"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -110,7 +101,6 @@ class FirstEnabledTrue(Config):
 
 
 class FirstEnabledFalse(Config):
-
     name: Literal["Disabled"] = "Disabled"
     value: Literal[False] = False
     type: Literal["bool"] = "bool"
@@ -118,7 +108,6 @@ class FirstEnabledFalse(Config):
 
 
 class FirstAdvancedEnabled(Config):
-
     name: Literal["Enabled"] = "Enabled"
     value: Union[FirstEnabledTrue, FirstEnabledFalse]
     type: Literal["object"] = "object"
@@ -126,7 +115,6 @@ class FirstAdvancedEnabled(Config):
 
 
 class FirstBasicOption(Config):
-
     name: Literal["Basic"] = "Basic"
     text: FirstBasicText
     number: FirstBasicNumber
@@ -135,7 +123,6 @@ class FirstBasicOption(Config):
 
 
 class FirstAdvancedOption(Config):
-
     name: Literal["Advanced"] = "Advanced"
     language: FirstLanguageText
     enabled: FirstAdvancedEnabled
@@ -144,7 +131,6 @@ class FirstAdvancedOption(Config):
 
 
 class FirstExecutorMode(Config):
-
     name: Literal["Mode"] = "Mode"
     value: Union[FirstBasicOption, FirstAdvancedOption]
     type: Literal["object"] = "object"
@@ -152,12 +138,10 @@ class FirstExecutorMode(Config):
 
 
 class FirstExecutorConfigs(Configs):
-
     mode: FirstExecutorMode
 
 
 class FirstExecutorRequest(Request):
-
     inputs: Optional[FirstExecutorInputs]
     configs: FirstExecutorConfigs
 
@@ -168,12 +152,10 @@ class FirstExecutorRequest(Request):
 
 
 class FirstExecutorResponse(Response):
-
     outputs: FirstExecutorOutputs
 
 
 class FirstExecutor(Config):
-
     name: Literal["FirstExecutor"] = "FirstExecutor"
     value: Union[FirstExecutorRequest, FirstExecutorResponse]
     type: Literal["object"] = "object"
@@ -189,7 +171,6 @@ class FirstExecutor(Config):
 
 
 class SecondInputImage(Input):
-
     name: Literal["inputImage2"] = "inputImage2"
     value: Union[List[Image], Image]
     type: str = "object"
@@ -204,7 +185,6 @@ class SecondInputImage(Input):
 
 
 class SecondOutputImage(Output):
-
     name: Literal["outputImage2"] = "outputImage2"
     value: Union[List[Image], Image]
     type: str = "object"
@@ -219,19 +199,16 @@ class SecondOutputImage(Output):
 
 
 class SecondExecutorInputs(Inputs):
-
     inputImage: InputImage
     inputImage2: SecondInputImage
 
 
 class SecondExecutorOutputs(Outputs):
-
     outputImage: OutputImage
     outputImage2: SecondOutputImage
 
 
 class SecondBasicText(Config):
-
     name: Literal["Text"] = "Text"
     value: str
     type: Literal["string"] = "string"
@@ -239,7 +216,6 @@ class SecondBasicText(Config):
 
 
 class SecondNumberOne(Config):
-
     name: Literal["One"] = "One"
     value: Literal[1] = 1
     type: Literal["number"] = "number"
@@ -247,7 +223,6 @@ class SecondNumberOne(Config):
 
 
 class SecondNumberTwo(Config):
-
     name: Literal["Two"] = "Two"
     value: Literal[2] = 2
     type: Literal["number"] = "number"
@@ -255,7 +230,6 @@ class SecondNumberTwo(Config):
 
 
 class SecondBasicNumber(Config):
-
     name: Literal["Number"] = "Number"
     value: Union[SecondNumberOne, SecondNumberTwo]
     type: Literal["object"] = "object"
@@ -263,7 +237,6 @@ class SecondBasicNumber(Config):
 
 
 class SecondLanguageText(Config):
-
     name: Literal["Language"] = "Language"
     value: str
     type: Literal["string"] = "string"
@@ -271,7 +244,6 @@ class SecondLanguageText(Config):
 
 
 class SecondEnabledTrue(Config):
-
     name: Literal["Enabled"] = "Enabled"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -279,7 +251,6 @@ class SecondEnabledTrue(Config):
 
 
 class SecondEnabledFalse(Config):
-
     name: Literal["Disabled"] = "Disabled"
     value: Literal[False] = False
     type: Literal["bool"] = "bool"
@@ -287,7 +258,6 @@ class SecondEnabledFalse(Config):
 
 
 class SecondAdvancedEnabled(Config):
-
     name: Literal["Enabled"] = "Enabled"
     value: Union[SecondEnabledTrue, SecondEnabledFalse]
     type: Literal["object"] = "object"
@@ -295,7 +265,6 @@ class SecondAdvancedEnabled(Config):
 
 
 class SecondBasicOption(Config):
-
     name: Literal["Basic"] = "Basic"
     text: SecondBasicText
     number: SecondBasicNumber
@@ -304,7 +273,6 @@ class SecondBasicOption(Config):
 
 
 class SecondAdvancedOption(Config):
-
     name: Literal["Advanced"] = "Advanced"
     language: SecondLanguageText
     enabled: SecondAdvancedEnabled
@@ -313,7 +281,6 @@ class SecondAdvancedOption(Config):
 
 
 class SecondExecutorMode(Config):
-
     name: Literal["Mode"] = "Mode"
     value: Union[SecondBasicOption, SecondAdvancedOption]
     type: Literal["object"] = "object"
@@ -321,12 +288,10 @@ class SecondExecutorMode(Config):
 
 
 class SecondExecutorConfigs(Configs):
-
     mode: SecondExecutorMode
 
 
 class SecondExecutorRequest(Request):
-
     inputs: Optional[SecondExecutorInputs]
     configs: SecondExecutorConfigs
 
@@ -337,12 +302,10 @@ class SecondExecutorRequest(Request):
 
 
 class SecondExecutorResponse(Response):
-
     outputs: SecondExecutorOutputs
 
 
 class SecondExecutor(Config):
-
     name: Literal["SecondExecutor"] = "SecondExecutor"
     value: Union[SecondExecutorRequest, SecondExecutorResponse]
     type: Literal["object"] = "object"
@@ -358,24 +321,21 @@ class SecondExecutor(Config):
 
 
 class ConfigExecutor(Config):
-
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
     value: Union[FirstExecutor, SecondExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
+    restart: Literal[True] = True
 
     class Config:
         title = "Task"
 
 
 class PackageConfigs(Configs):
-
     executor: ConfigExecutor
 
 
 class PackageModel(Package):
-
     configs: PackageConfigs
     type: Literal["component"] = "component"
     name: Literal["IremPackage"] = "IremPackage"
-    
