@@ -378,3 +378,4 @@ class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
     name: Literal["IremPackage"] = "IremPackage"
+    
