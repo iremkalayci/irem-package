@@ -51,51 +51,6 @@ class OutputImage(Output):
         title = "Image"
 
 
-class KeepSideFalse(Config):
-
-    name: Literal["False"] = "False"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Disable"
-
-
-class KeepSideTrue(Config):
-
-    name: Literal["True"] = "True"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Enable"
-
-
-class KeepSideBBox(Config):
-
-    name: Literal["KeepSide"] = "KeepSide"
-    value: Union[KeepSideTrue, KeepSideFalse]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-    class Config:
-        title = "Keep Sides"
-
-
-class Degree(Config):
-
-    name: Literal["Degree"] = "Degree"
-    value: int = Field(ge=-359.0, le=359.0, default=0)
-    type: Literal["number"] = "number"
-    field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["[-359, 359]"] = "[-359, 359]"
-
-    class Config:
-        title = "Angle"
-
-
 class FirstExecutorInputs(Inputs):
 
     inputImage: InputImage
@@ -107,6 +62,7 @@ class FirstExecutorOutputs(Outputs):
 
 
 class FirstBasicText(Config):
+
     name: Literal["Text"] = "Text"
     value: str
     type: Literal["string"] = "string"
@@ -114,6 +70,7 @@ class FirstBasicText(Config):
 
 
 class FirstNumberOne(Config):
+
     name: Literal["One"] = "One"
     value: Literal[1] = 1
     type: Literal["number"] = "number"
@@ -121,6 +78,7 @@ class FirstNumberOne(Config):
 
 
 class FirstNumberTwo(Config):
+
     name: Literal["Two"] = "Two"
     value: Literal[2] = 2
     type: Literal["number"] = "number"
@@ -128,26 +86,47 @@ class FirstNumberTwo(Config):
 
 
 class FirstBasicNumber(Config):
+
     name: Literal["Number"] = "Number"
     value: Union[FirstNumberOne, FirstNumberTwo]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
-class FirstAdvancedLanguage(Config):
+
+class FirstLanguageText(Config):
+
     name: Literal["Language"] = "Language"
     value: str
     type: Literal["string"] = "string"
-    field: Literal["dropdownlist"] = "dropdownlist"
+    field: Literal["textInput"] = "textInput"
+
+
+class FirstEnabledTrue(Config):
+
+    name: Literal["Enabled"] = "Enabled"
+    value: Literal[True] = True
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+
+class FirstEnabledFalse(Config):
+
+    name: Literal["Disabled"] = "Disabled"
+    value: Literal[False] = False
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
 
 
 class FirstAdvancedEnabled(Config):
+
     name: Literal["Enabled"] = "Enabled"
-    value: bool
-    type: Literal["bool"] = "bool"
-    field: Literal["selectBox"] = "selectBox"
+    value: Union[FirstEnabledTrue, FirstEnabledFalse]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
 
 
 class FirstBasicOption(Config):
+
     name: Literal["Basic"] = "Basic"
     text: FirstBasicText
     number: FirstBasicNumber
@@ -156,14 +135,16 @@ class FirstBasicOption(Config):
 
 
 class FirstAdvancedOption(Config):
+
     name: Literal["Advanced"] = "Advanced"
-    language: FirstAdvancedLanguage
+    language: FirstLanguageText
     enabled: FirstAdvancedEnabled
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
 
 class FirstExecutorMode(Config):
+
     name: Literal["Mode"] = "Mode"
     value: Union[FirstBasicOption, FirstAdvancedOption]
     type: Literal["object"] = "object"
@@ -171,6 +152,7 @@ class FirstExecutorMode(Config):
 
 
 class FirstExecutorConfigs(Configs):
+
     mode: FirstExecutorMode
 
 
@@ -249,6 +231,7 @@ class SecondExecutorOutputs(Outputs):
 
 
 class SecondBasicText(Config):
+
     name: Literal["Text"] = "Text"
     value: str
     type: Literal["string"] = "string"
@@ -256,6 +239,7 @@ class SecondBasicText(Config):
 
 
 class SecondNumberOne(Config):
+
     name: Literal["One"] = "One"
     value: Literal[1] = 1
     type: Literal["number"] = "number"
@@ -263,6 +247,7 @@ class SecondNumberOne(Config):
 
 
 class SecondNumberTwo(Config):
+
     name: Literal["Two"] = "Two"
     value: Literal[2] = 2
     type: Literal["number"] = "number"
@@ -270,27 +255,47 @@ class SecondNumberTwo(Config):
 
 
 class SecondBasicNumber(Config):
+
     name: Literal["Number"] = "Number"
     value: Union[SecondNumberOne, SecondNumberTwo]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
 
-class SecondAdvancedLanguage(Config):
+class SecondLanguageText(Config):
+
     name: Literal["Language"] = "Language"
     value: str
     type: Literal["string"] = "string"
-    field: Literal["dropdownlist"] = "dropdownlist"
+    field: Literal["textInput"] = "textInput"
+
+
+class SecondEnabledTrue(Config):
+
+    name: Literal["Enabled"] = "Enabled"
+    value: Literal[True] = True
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+
+class SecondEnabledFalse(Config):
+
+    name: Literal["Disabled"] = "Disabled"
+    value: Literal[False] = False
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
 
 
 class SecondAdvancedEnabled(Config):
+
     name: Literal["Enabled"] = "Enabled"
-    value: bool
-    type: Literal["bool"] = "bool"
-    field: Literal["selectBox"] = "selectBox"
+    value: Union[SecondEnabledTrue, SecondEnabledFalse]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
 
 
 class SecondBasicOption(Config):
+
     name: Literal["Basic"] = "Basic"
     text: SecondBasicText
     number: SecondBasicNumber
@@ -299,14 +304,16 @@ class SecondBasicOption(Config):
 
 
 class SecondAdvancedOption(Config):
+
     name: Literal["Advanced"] = "Advanced"
-    language: SecondAdvancedLanguage
+    language: SecondLanguageText
     enabled: SecondAdvancedEnabled
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
 
 class SecondExecutorMode(Config):
+
     name: Literal["Mode"] = "Mode"
     value: Union[SecondBasicOption, SecondAdvancedOption]
     type: Literal["object"] = "object"
@@ -314,6 +321,7 @@ class SecondExecutorMode(Config):
 
 
 class SecondExecutorConfigs(Configs):
+
     mode: SecondExecutorMode
 
 
