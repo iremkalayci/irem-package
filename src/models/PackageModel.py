@@ -113,12 +113,25 @@ class FirstBasicText(Config):
     field: Literal["textInput"] = "textInput"
 
 
+class FirstNumberOne(Config):
+    name: Literal["One"] = "One"
+    value: Literal[1] = 1
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class FirstNumberTwo(Config):
+    name: Literal["Two"] = "Two"
+    value: Literal[2] = 2
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
 class FirstBasicNumber(Config):
     name: Literal["Number"] = "Number"
-    value: int
-    type: Literal["number"] = "number"
-    field: Literal["selectBox"] = "selectBox"
-
+    value: Union[FirstNumberOne, FirstNumberTwo]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
 
 class FirstAdvancedLanguage(Config):
     name: Literal["Language"] = "Language"
@@ -242,11 +255,25 @@ class SecondBasicText(Config):
     field: Literal["textInput"] = "textInput"
 
 
+class SecondNumberOne(Config):
+    name: Literal["One"] = "One"
+    value: Literal[1] = 1
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class SecondNumberTwo(Config):
+    name: Literal["Two"] = "Two"
+    value: Literal[2] = 2
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
 class SecondBasicNumber(Config):
     name: Literal["Number"] = "Number"
-    value: int
-    type: Literal["number"] = "number"
-    field: Literal["selectBox"] = "selectBox"
+    value: Union[SecondNumberOne, SecondNumberTwo]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
 
 
 class SecondAdvancedLanguage(Config):
