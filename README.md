@@ -6,7 +6,7 @@
 
 **Status:** Experimental
 
-**Last Updated:** 22.09.2026
+**Last Updated:** 23.09.2026
 
 ---
 
@@ -97,11 +97,21 @@ The package can be used to demonstrate a multi-executor NovaVision package. The 
 ## 6. Limitations and Notes
 
 - The package is primarily a demonstration of the NovaVision multi-executor package structure and configuration system.
-- The executors currently pass the received image data to their corresponding outputs rather than performing a computer vision transformation.
-- `inputImage` and `inputImage2` accept either a single image or a list of images.
-- The package requires the NovaVision SDK/runtime environment for execution.
-- The package was validated for Python syntax using `python -m compileall src`.
-- During Flow integration, the NovaVision platform reported the following error while resolving images for the active executor:
 
-```text
-No images found for active executor: FirstExecutor in package: IremPackage
+- The executors currently pass the received image data to their corresponding outputs rather than performing a computer vision transformation.
+
+- `inputImage` and `inputImage2` accept either a single image or a list of images.
+
+- The package requires the NovaVision SDK/runtime environment for execution.
+
+- The package was validated for Python syntax using `python -m compileall src`.
+
+- During Flow testing, the Flow passed the validation stage and entered the execution stage.
+
+- The configured `ImageLoad` executors were successfully invoked during the Flow test.
+
+- The current Flow test interface displayed `Outputs (0)` after execution. No rendered output image was displayed directly in the Flow test result.
+
+- The Flow returned to the executor configuration panel after the test completed. The package configuration remained accessible and the executor inputs were preserved.
+
+- The current implementation is intended primarily to demonstrate package structure, multiple executors, image input/output definitions, and dependent dropdown configurations rather than image processing functionality.
