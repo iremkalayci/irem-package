@@ -18,6 +18,16 @@ class SecondExecutor(Component):
         self.request.model = PackageModel(**(self.request.data))
         self.image1 = self.request.get_param("inputImage")
         self.image2 = self.request.get_param("inputImage2")
+        self.rotation = (
+            self.request.model
+            .configs
+            .executor
+            .value
+            .value
+            .configs
+            .rotation
+            .value
+        )
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
@@ -34,8 +44,17 @@ class SecondExecutor(Component):
             redis_db=self.redis_db
         )
 
-        img1.value = np.rot90(img1.value, k=-1)
-        img2.value = np.rot90(img2.value, k=-1)
+        rotation = self.rotation
+
+        if rotation.name == "Clockwise":
+            angle = rotation.angle.value
+            k = -(angle // 90)
+        else:
+            angle = rotation.angle.value
+            k = angle // 90
+
+        img1.value = np.rot90(img1.value, k=k)
+        img2.value = np.rot90(img2.value, k=k)
 
         self.image1 = Image.set_frame(
             img=img1,
