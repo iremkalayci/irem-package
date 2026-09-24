@@ -206,89 +206,87 @@ class SecondExecutorOutputs(Outputs):
     outputImage: OutputImage
     outputImage2: SecondOutputImage
 
+class SecondClockwiseAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
 
-class SecondBasicText(Config):
-    name: Literal["Text"] = "Text"
+
+class SecondClockwiseAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class SecondClockwiseAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[SecondClockwiseAngle90, SecondClockwiseAngle180]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+
+class SecondClockwiseDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class SecondNumberOne(Config):
-    name: Literal["One"] = "One"
-    value: Literal[1] = 1
+class SecondClockwise(Config):
+    name: Literal["Clockwise"] = "Clockwise"
+    angle: SecondClockwiseAngle
+    description: SecondClockwiseDescription
+    type: Literal["object"] = "object"
+    field: Literal["option"] = "option"
+
+
+class SecondCounterAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class SecondNumberTwo(Config):
-    name: Literal["Two"] = "Two"
-    value: Literal[2] = 2
+class SecondCounterAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class SecondBasicNumber(Config):
-    name: Literal["Number"] = "Number"
-    value: Union[SecondNumberOne, SecondNumberTwo]
+class SecondCounterAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[SecondCounterAngle90, SecondCounterAngle180]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
 
-class SecondLanguageText(Config):
-    name: Literal["Language"] = "Language"
+class SecondCounterDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class SecondEnabledTrue(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class SecondEnabledFalse(Config):
-    name: Literal["Disabled"] = "Disabled"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class SecondAdvancedEnabled(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Union[SecondEnabledTrue, SecondEnabledFalse]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-
-class SecondBasicOption(Config):
-    name: Literal["Basic"] = "Basic"
-    text: SecondBasicText
-    number: SecondBasicNumber
+class SecondCounter(Config):
+    name: Literal["Counterclockwise"] = "Counterclockwise"
+    angle: SecondCounterAngle
+    description: SecondCounterDescription
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
 
-class SecondAdvancedOption(Config):
-    name: Literal["Advanced"] = "Advanced"
-    language: SecondLanguageText
-    enabled: SecondAdvancedEnabled
-    type: Literal["object"] = "object"
-    field: Literal["option"] = "option"
-
-
-class SecondExecutorMode(Config):
-    name: Literal["Mode"] = "Mode"
-    value: Union[SecondBasicOption, SecondAdvancedOption]
+class SecondExecutorRotation(Config):
+    name: Literal["Rotation"] = "Rotation"
+    value: Union[SecondClockwise, SecondCounter]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
 
 class SecondExecutorConfigs(Configs):
-    mode: SecondExecutorMode
-
+    rotation: SecondExecutorRotation
 
 class SecondExecutorRequest(Request):
     inputs: Optional[SecondExecutorInputs]
