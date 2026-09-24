@@ -1,117 +1,92 @@
-# Irem Package
+# Image Rotation Demo for NovaVision
 
-> A NovaVision package demonstrating a multi-executor structure with image inputs/outputs and dependent dropdown configurations.
+**Image Rotation Demo** is a NovaVision component package that demonstrates multiple executors and configurable image rotation.
 
-**Category:** Utility
+The package consists of two executors:
 
-**Status:** Experimental
+## 1. Rotate Image
 
-**Last Updated:** 23.09.2026
+The **Rotate Image** executor takes one input image and produces one output image.
 
----
+**Input:** `inputImage`
 
-## 1. Overview
+**Output:** `outputImage`
 
-Irem Package is a NovaVision package developed to demonstrate a multi-executor package structure. The package contains two independent executors with different input/output requirements and dependent dropdown configurations.
+![Rotate Image Flow](images/rotate-image-flow.png)
 
-The first executor accepts one image and produces one image output, while the second executor accepts two image inputs and produces two image outputs. The package also demonstrates dependent dropdown options containing different UI field types.
+## 2. Rotate Two Images
 
-**Typical use cases:**
+The **Rotate Two Images** executor takes two input images and produces two output images.
 
-- Demonstrating a package with multiple executors in NovaVision.
-- Testing image input and output connections in a Flow.
-- Demonstrating dependent dropdown configurations with different field types.
+**Inputs:**
+- `inputImage`
+- `inputImage2`
 
-![NovaVision Flow](docs/flow.png)
+**Outputs:**
+- `outputImage`
+- `outputImage2`
 
----
+![Rotate Two Images Flow](images/rotate-two-images-flow.png)
 
-## 2. Inputs
+## Rotation Configuration
 
-| Field Name | Kind/Type | Required | Default | Description |
-|---|---|---|---|---|
-| `inputImage` | `Image / list[Image]` | Yes | — | Image input used by the First Executor. |
-| `inputImage2` | `Image / list[Image]` | Yes | — | Second image input used by the Second Executor. |
+Both executors use a `dependentDropdownlist` named `Rotation`.
 
-The `inputImage` field accepts either a single `Image` object or a list of `Image` objects.
+The configuration has two options:
 
-The `inputImage2` field follows the same structure and accepts either a single `Image` object or a list of `Image` objects.
+- `Clockwise`
+- `Counterclockwise`
 
----
+Each option contains two different field types:
 
-## 3. Configuration Parameters
+- `Angle`: `dropdownlist` with `90°` and `180°` options
+- `Description`: `textInput`
 
-| Parameter | Type | Field Type (UI control) | Allowed Values / Range | Default | Description |
-|---|---|---|---|---|---|
-| `Mode` | `object` | `dependentDropdownlist` | `Basic`, `Advanced` | — | Selects the configuration option for the executor. |
-| `Basic.Text` | `string` | `textInput` | Free text | — | Text value available under the Basic option. |
-| `Basic.Number` | `object` | `dropdownlist` | `One`, `Two` | — | Selects between the numeric options 1 and 2. |
-| `Advanced.Language` | `string` | `textInput` | Free text | — | Language value available under the Advanced option. |
-| `Advanced.Enabled` | `object` | `dropdownlist` | `Enabled`, `Disabled` | — | Selects the boolean enabled state. |
+```text
+Rotation
+├── Clockwise
+│   ├── Angle → dropdownlist
+│   └── Description → textInput
+│
+└── Counterclockwise
+    ├── Angle → dropdownlist
+    └── Description → textInput
+```
 
-The package implements the required `dependentDropdownlist` configuration for both executors.
+The selected rotation direction and angle are applied to the input image or images.
 
-Each executor provides two dependent dropdown options:
+## Rotation Example
 
-- **Basic**
-  - `Text` → `textInput`
-  - `Number` → `dropdownlist`
+The following example shows a 90° clockwise rotation.
 
-- **Advanced**
-  - `Language` → `textInput`
-  - `Enabled` → `dropdownlist`
+![Rotation Example](images/rotation-example.png)
 
-The same configuration structure is implemented independently for both executors.
+## Process Flow
 
----
+### Rotate Image
 
-## 4. Outputs
+1. The input image is loaded.
+2. The selected rotation configuration is read.
+3. The image is rotated according to the selected direction and angle.
+4. The rotated image is returned as `outputImage`.
 
-| Field Name | Kind/Type | Description |
-|---|---|---|
-| `outputImage` | `Image / list[Image]` | Image output produced by the First Executor. |
-| `outputImage2` | `Image / list[Image]` | Second image output produced by the Second Executor. |
+### Rotate Two Images
 
-The First Executor receives `inputImage` and returns it through `outputImage`.
+1. Two input images are loaded.
+2. The selected rotation configuration is read.
+3. The same rotation configuration is applied to both images.
+4. Both rotated images are returned as outputs.
 
-The Second Executor receives `inputImage` and `inputImage2` and returns them through `outputImage` and `outputImage2`, respectively.
+## Package Structure
 
----
-
-## 5. Use Case Examples
-
-**Use case 1: Single Image Flow**
-
-An image source provides an image to the `First Executor` through the `inputImage` input. The executor receives the image and returns it through `outputImage`, which can then be consumed by another package or component in the Flow.
-
-**Use case 2: Two Image Flow**
-
-Two image sources provide `inputImage` and `inputImage2` to the `Second Executor`. The executor returns the corresponding images through `outputImage` and `outputImage2`, which can then be connected to subsequent components in the Flow.
-
-**Use case 3: Executor Configuration Demonstration**
-
-The package can be used to demonstrate a multi-executor NovaVision package. The user can select between `First Executor` and `Second Executor` and configure each executor using its corresponding dependent dropdown options.
-
----
-
-## 6. Limitations and Notes
-
-- The package is primarily a demonstration of the NovaVision multi-executor package structure and configuration system.
-
-- The executors currently pass the received image data to their corresponding outputs rather than performing a computer vision transformation.
-
-- `inputImage` and `inputImage2` accept either a single image or a list of images.
-
-- The package requires the NovaVision SDK/runtime environment for execution.
-
-- The package was validated for Python syntax using `python -m compileall src`.
-
-- During Flow testing, the Flow passed the validation stage and entered the execution stage.
-
-- The configured `ImageLoad` executors were successfully invoked during the Flow test.
-
-- The current Flow test interface displayed `Outputs (0)` after execution. No rendered output image was displayed directly in the Flow test result.
-
-- The Flow returned to the executor configuration panel after the test completed. The package configuration remained accessible and the executor inputs were preserved.
-
-- The current implementation is intended primarily to demonstrate package structure, multiple executors, image input/output definitions, and dependent dropdown configurations rather than image processing functionality.
+```text
+IremPackage/
+├── src/
+│   ├── executors/
+│   │   ├── FirstExecutor.py
+│   │   └── SecondExecutor.py
+│   ├── models/
+│   │   └── PackageModel.py
+│   └── utils/
+│       └── response.py
+```
