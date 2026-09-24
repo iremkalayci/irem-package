@@ -28,7 +28,7 @@ class FirstExecutor(Component):
             redis_db=self.redis_db
         )
 
-      
+        img.value = np.rot90(img.value, k=-1)
 
         self.image = Image.set_frame(
             img=img,
