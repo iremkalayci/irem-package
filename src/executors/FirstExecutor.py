@@ -1,13 +1,14 @@
 import os
 import sys
+import numpy as np
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
 
 from sdks.novavision.src.media.image import Image
 from sdks.novavision.src.base.component import Component
 from sdks.novavision.src.helper.executor import Executor
-from components.Package.src.utils.response import build_response
-from components.Package.src.models.PackageModel import PackageModel
+from components.IremPackage.src.utils.response import build_response
+from components.IremPackage.src.models.PackageModel import PackageModel
 
 
 class FirstExecutor(Component):
@@ -16,6 +17,16 @@ class FirstExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
         self.image = self.request.get_param("inputImage")
+        self.rotation = (
+            self.request.model
+            .configs
+            .executor
+            .value
+            .value
+            .configs
+            .rotation
+            .value
+        )
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
@@ -26,6 +37,17 @@ class FirstExecutor(Component):
             img=self.image,
             redis_db=self.redis_db
         )
+
+        rotation = self.rotation
+
+        if rotation.name == "Clockwise":
+            angle = rotation.angle.value.value
+            k = -(angle // 90)
+        else:
+            angle = rotation.angle.value.value
+            k = angle // 90
+
+        img.value = np.rot90(img.value, k=k)
 
         self.image = Image.set_frame(
             img=img,

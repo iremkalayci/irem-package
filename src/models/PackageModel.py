@@ -58,88 +58,87 @@ class FirstExecutorOutputs(Outputs):
     outputImage: OutputImage
 
 
-class FirstBasicText(Config):
-    name: Literal["Text"] = "Text"
+class FirstClockwiseAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class FirstClockwiseAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class FirstClockwiseAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[FirstClockwiseAngle90, FirstClockwiseAngle180]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+
+class FirstClockwiseDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class FirstNumberOne(Config):
-    name: Literal["One"] = "One"
-    value: Literal[1] = 1
+class FirstClockwise(Config):
+    name: Literal["Clockwise"] = "Clockwise"
+    angle: FirstClockwiseAngle
+    description: FirstClockwiseDescription
+    type: Literal["object"] = "object"
+    field: Literal["option"] = "option"
+
+
+class FirstCounterAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class FirstNumberTwo(Config):
-    name: Literal["Two"] = "Two"
-    value: Literal[2] = 2
+class FirstCounterAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class FirstBasicNumber(Config):
-    name: Literal["Number"] = "Number"
-    value: Union[FirstNumberOne, FirstNumberTwo]
+class FirstCounterAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[FirstCounterAngle90, FirstCounterAngle180]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
 
-class FirstLanguageText(Config):
-    name: Literal["Language"] = "Language"
+class FirstCounterDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class FirstEnabledTrue(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class FirstEnabledFalse(Config):
-    name: Literal["Disabled"] = "Disabled"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class FirstAdvancedEnabled(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Union[FirstEnabledTrue, FirstEnabledFalse]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-
-class FirstBasicOption(Config):
-    name: Literal["Basic"] = "Basic"
-    text: FirstBasicText
-    number: FirstBasicNumber
+class FirstCounter(Config):
+    name: Literal["Counterclockwise"] = "Counterclockwise"
+    angle: FirstCounterAngle
+    description: FirstCounterDescription
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
 
-class FirstAdvancedOption(Config):
-    name: Literal["Advanced"] = "Advanced"
-    language: FirstLanguageText
-    enabled: FirstAdvancedEnabled
-    type: Literal["object"] = "object"
-    field: Literal["option"] = "option"
-
-
-class FirstExecutorMode(Config):
-    name: Literal["Mode"] = "Mode"
-    value: Union[FirstBasicOption, FirstAdvancedOption]
+class FirstExecutorRotation(Config):
+    name: Literal["Rotation"] = "Rotation"
+    value: Union[FirstClockwise, FirstCounter]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
 
 class FirstExecutorConfigs(Configs):
-    mode: FirstExecutorMode
-
+    rotation: FirstExecutorRotation
 
 class FirstExecutorRequest(Request):
     inputs: Optional[FirstExecutorInputs]
@@ -162,7 +161,7 @@ class FirstExecutor(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "First Executor"
+        title = "Rotate Image 90°"
         json_schema_extra = {
             "target": {
                 "value": 0
@@ -207,89 +206,87 @@ class SecondExecutorOutputs(Outputs):
     outputImage: OutputImage
     outputImage2: SecondOutputImage
 
+class SecondClockwiseAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
 
-class SecondBasicText(Config):
-    name: Literal["Text"] = "Text"
+
+class SecondClockwiseAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
+    type: Literal["number"] = "number"
+    field: Literal["option"] = "option"
+
+
+class SecondClockwiseAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[SecondClockwiseAngle90, SecondClockwiseAngle180]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+
+class SecondClockwiseDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class SecondNumberOne(Config):
-    name: Literal["One"] = "One"
-    value: Literal[1] = 1
+class SecondClockwise(Config):
+    name: Literal["Clockwise"] = "Clockwise"
+    angle: SecondClockwiseAngle
+    description: SecondClockwiseDescription
+    type: Literal["object"] = "object"
+    field: Literal["option"] = "option"
+
+
+class SecondCounterAngle90(Config):
+    name: Literal["90"] = "90"
+    value: Literal[90] = 90
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class SecondNumberTwo(Config):
-    name: Literal["Two"] = "Two"
-    value: Literal[2] = 2
+class SecondCounterAngle180(Config):
+    name: Literal["180"] = "180"
+    value: Literal[180] = 180
     type: Literal["number"] = "number"
     field: Literal["option"] = "option"
 
 
-class SecondBasicNumber(Config):
-    name: Literal["Number"] = "Number"
-    value: Union[SecondNumberOne, SecondNumberTwo]
+class SecondCounterAngle(Config):
+    name: Literal["Angle"] = "Angle"
+    value: Union[SecondCounterAngle90, SecondCounterAngle180]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
 
-class SecondLanguageText(Config):
-    name: Literal["Language"] = "Language"
+class SecondCounterDescription(Config):
+    name: Literal["Description"] = "Description"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
 
 
-class SecondEnabledTrue(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class SecondEnabledFalse(Config):
-    name: Literal["Disabled"] = "Disabled"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-
-class SecondAdvancedEnabled(Config):
-    name: Literal["Enabled"] = "Enabled"
-    value: Union[SecondEnabledTrue, SecondEnabledFalse]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-
-class SecondBasicOption(Config):
-    name: Literal["Basic"] = "Basic"
-    text: SecondBasicText
-    number: SecondBasicNumber
+class SecondCounter(Config):
+    name: Literal["Counterclockwise"] = "Counterclockwise"
+    angle: SecondCounterAngle
+    description: SecondCounterDescription
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
 
-class SecondAdvancedOption(Config):
-    name: Literal["Advanced"] = "Advanced"
-    language: SecondLanguageText
-    enabled: SecondAdvancedEnabled
-    type: Literal["object"] = "object"
-    field: Literal["option"] = "option"
-
-
-class SecondExecutorMode(Config):
-    name: Literal["Mode"] = "Mode"
-    value: Union[SecondBasicOption, SecondAdvancedOption]
+class SecondExecutorRotation(Config):
+    name: Literal["Rotation"] = "Rotation"
+    value: Union[SecondClockwise, SecondCounter]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
 
 class SecondExecutorConfigs(Configs):
-    mode: SecondExecutorMode
-
+    rotation: SecondExecutorRotation
 
 class SecondExecutorRequest(Request):
     inputs: Optional[SecondExecutorInputs]
@@ -312,7 +309,7 @@ class SecondExecutor(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Second Executor"
+        title = "Rotate Two Images 90°"
         json_schema_extra = {
             "target": {
                 "value": 0
