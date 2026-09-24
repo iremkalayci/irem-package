@@ -34,8 +34,7 @@ class SecondExecutor(Component):
             redis_db=self.redis_db
         )
 
-        img1 = np.rot90(img1, k=-1)
-        img2 = np.rot90(img2, k=-1)
+        
 
         self.image1 = Image.set_frame(
             img=img1,
