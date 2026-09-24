@@ -1,5 +1,6 @@
 import os
 import sys
+import numpy as np
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
 
@@ -32,6 +33,9 @@ class SecondExecutor(Component):
             img=self.image2,
             redis_db=self.redis_db
         )
+
+        img1 = np.rot90(img1, k=-1)
+        img2 = np.rot90(img2, k=-1)
 
         self.image1 = Image.set_frame(
             img=img1,

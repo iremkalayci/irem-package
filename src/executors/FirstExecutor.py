@@ -1,5 +1,6 @@
 import os
 import sys
+import numpy as np
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
 
@@ -26,6 +27,8 @@ class FirstExecutor(Component):
             img=self.image,
             redis_db=self.redis_db
         )
+
+        img = np.rot90(img, k=-1)
 
         self.image = Image.set_frame(
             img=img,
