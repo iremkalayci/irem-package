@@ -1,6 +1,6 @@
 from sdks.novavision.src.helper.package import PackageHelper
 
-from components.Package.src.models.PackageModel import (
+from components.IremPackage.src.models.PackageModel import (
     PackageModel,
     PackageConfigs,
     ConfigExecutor,
