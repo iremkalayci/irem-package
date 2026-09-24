@@ -41,10 +41,10 @@ class FirstExecutor(Component):
         rotation = self.rotation
 
         if rotation.name == "Clockwise":
-            angle = rotation.angle.value
+            angle = rotation.angle.value.value
             k = -(angle // 90)
         else:
-            angle = rotation.angle.value
+            angle = rotation.angle.value.value
             k = angle // 90
 
         img.value = np.rot90(img.value, k=k)
